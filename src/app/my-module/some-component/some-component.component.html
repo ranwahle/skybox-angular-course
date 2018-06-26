@@ -1,0 +1,10 @@
+<div style="border-style: solid">
+  <span  [appMyNgClass]="{'title-styles': false}"> {{componentTitle}}</span>
+  <button (click)="changeTitle($event)">Change title</button>
+
+  <app-some-child>
+    <div>Parent content- div {{componentTitle}}
+    </div>
+    <h2>Title</h2>
+  </app-some-child>
+</div>
