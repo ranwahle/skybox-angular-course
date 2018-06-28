@@ -1,4 +1,4 @@
-import {Directive, ElementRef, Input, OnInit} from '@angular/core';
+import {Directive, ElementRef, HostListener, Input, OnInit} from '@angular/core';
 
 @Directive({
   selector: '[appMyNgClass]'
@@ -11,9 +11,13 @@ export class MyNgClassDirective implements OnInit{
 
   }
 
+  @HostListener('click', ['clickEvent'])
+  elementClicked(clickEvent) {
+    console.log('NgClass host element clicked', clickEvent);
+  }
+
   ngOnInit() {
     const keys = Object.keys(this.cssClass);
-    console.log('keys', keys)
     keys.forEach(key => {
       if (this.cssClass[key]) {
         this.elRef.nativeElement.classList.add(key)

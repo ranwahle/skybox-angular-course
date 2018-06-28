@@ -1,0 +1,7 @@
+<ul>
+  <li *ngFor="let vul of vulnerabilities; trackBy: trackById; let  index = index; ">
+    {{index + 1}}. {{vul.severity | toLower}}
+    <input type="text"[(ngModel)]="vul.severity">
+  </li>
+</ul>
+Current time: {{currentTime}}
