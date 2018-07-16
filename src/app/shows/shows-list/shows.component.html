@@ -1,0 +1,13 @@
+<form [formGroup]="formGroup">
+<input placeholder="search" [formControlName]="QueryControlName"
+       (keydown.enter)="searchShow()">
+<input type="text" formControlName="ip">
+</form>
+{{formGroup.errors | json}}
+<ul>
+  <li *ngFor="let show of shows">
+    {{show.name}}
+    <br/>
+    <img *ngIf="show.image" [attr.src]="show.image.medium">
+  </li>
+</ul>
