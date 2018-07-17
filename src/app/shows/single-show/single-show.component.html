@@ -1,0 +1,6 @@
+<div *ngIf="show">
+  {{show.name}}
+  <div *ngIf="show && show.image">
+    <img [attr.src]="show.image.medium">
+  </div>
+</div>

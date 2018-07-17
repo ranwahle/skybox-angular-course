@@ -2,7 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {map} from 'rxjs/internal/operators';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {movieNameValidator, myIpValidator, myMaxLengthValidator} from './custom-validator';
+import {movieNameValidator, myMaxLengthValidator} from './custom-validator';
+import {ShowsService} from '../shows.service';
 
 const ControlName = 'query';
 
@@ -16,9 +17,10 @@ export class ShowsComponent implements OnInit {
   query: string;
   shows: any;
   formGroup: FormGroup;
+  childActive = false;
   readonly QueryControlName = ControlName;
 
-  constructor(private http: HttpClient,
+  constructor(private showsService: ShowsService,
               private formBuilder: FormBuilder) {
   }
 
@@ -34,11 +36,12 @@ export class ShowsComponent implements OnInit {
             [Validators.required,
               movieNameValidator,
               myMaxLengthValidator(10)])]
-        , 'ip': ['', Validators.compose([
-          myIpValidator
-        ])]
       });
     this.searchShow();
+  }
+
+  youHaveChildren() {
+    this.childActive = true;
   }
 
   searchShow() {
@@ -51,8 +54,7 @@ export class ShowsComponent implements OnInit {
 
 
     this.query = this.formGroup.get('query').value;
-    this.http.get(`search/shows?q=${this.query}`).pipe(map(
-      (data: any[]) => data.map(item => item.show)))
+    this.showsService.getShows(this.query)
       .subscribe(data =>
         this.shows = data);
   }
