@@ -12,6 +12,10 @@ import {ToLowerPipe} from './to-lower.pipe';
 import {RouterModule} from '@angular/router';
 import {routes} from './app.routing';
 import { HeaderComponent } from './header/header.component';
+import {StoreModule} from '@ngrx/store';
+import {reducers} from './store/app.reducers';
+import {environment} from '../environments/environment';
+import {StoreDevtools, StoreDevtoolsModule} from '@ngrx/store-devtools';
 
 @NgModule({
   declarations: [
@@ -27,6 +31,11 @@ import { HeaderComponent } from './header/header.component';
     FormsModule,
     HttpClientModule,
     MyModuleModule,
+    StoreModule.forRoot(reducers),
+    environment.production ?  [] :  StoreDevtoolsModule.instrument({
+      maxAge: 60,
+
+    }),
     RouterModule.forRoot(routes)
   ],
   providers: [{

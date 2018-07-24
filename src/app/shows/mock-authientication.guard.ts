@@ -3,7 +3,7 @@ import {Observable} from 'rxjs';
 import {Injectable} from '@angular/core';
 
 @Injectable()
-export class MockAuthienticationGuard implements CanDeactivate {
+export class MockAuthienticationGuard implements CanDeactivate<any> {
   canDeactivate(component: any, currentRoute:
     ActivatedRouteSnapshot, currentState: RouterStateSnapshot, nextState?:
                      RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
