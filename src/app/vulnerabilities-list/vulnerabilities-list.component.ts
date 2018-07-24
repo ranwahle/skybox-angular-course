@@ -1,5 +1,6 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnChanges, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnChanges, OnDestroy, OnInit} from '@angular/core';
 import * as _ from 'lodash';
+
 @Component({
   selector: 'app-vulnerabilities-list',
   templateUrl: './vulnerabilities-list.component.html',
@@ -7,13 +8,20 @@ import * as _ from 'lodash';
   changeDetection: ChangeDetectionStrategy.OnPush
 
 })
-export class VulnerabilitiesListComponent implements OnInit, OnChanges {
+export class VulnerabilitiesListComponent implements OnInit, OnChanges, OnDestroy {
+
+  currentTime: Date;
+
+  constructor(private cdRef: ChangeDetectorRef) {
+
+  }
 
   private _vulnerabilities: any[];
-  currentTime: Date;
+
   get vulnerabilities() {
     return this._vulnerabilities;
   }
+
   @Input() set vulnerabilities(value: any[]) {
     console.log('set vols');
     this.currentTime = new Date();
@@ -23,9 +31,8 @@ export class VulnerabilitiesListComponent implements OnInit, OnChanges {
     this._vulnerabilities = value;
   }
 
-  constructor(private cdRef: ChangeDetectorRef) {
-    setInterval(() => this.currentTime = new Date(), 1000)
-    setInterval(() => this.cdRef.detectChanges(), 2000)
+  ngOnDestroy() {
+    console.log(' I have been destroyed');
   }
 
   ngOnChanges(changes) {
@@ -40,11 +47,28 @@ export class VulnerabilitiesListComponent implements OnInit, OnChanges {
     return vul.id;
   }
 
+  setVulnerablilities() {
+    const vul1 = {id: 0, severity: 'High'}
+    this.vulnerabilities = [vul1, vul1, {
+      id: 1,
+      severity: 'Critical'
+    },
+      {
+        id: 2,
+        severity: 'Critical'
+      }, {
+        id: 3,
+        severity: 'Non Issue'
+      }, {
+        id: 4,
+        severity: 'Moderate'
+      }
+    ];
+  }
 
 
   ngOnInit() {
-
-
+    this.setVulnerablilities()
   }
 
 }

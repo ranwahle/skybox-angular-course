@@ -1,0 +1,14 @@
+<form [formGroup]="formGroup">
+  <input placeholder="search" [formControlName]="QueryControlName"
+         (keydown.enter)="searchShow()">
+</form>
+{{formGroup.errors | json}}
+<ul>
+  <li *ngFor="let show of shows">
+    <a [routerLink]="['singleShow/' + show.id]"> {{show.name}}
+      <br/>
+      <img *ngIf="show.image && !childActive" [attr.src]="show.image.medium">
+    </a>
+  </li>
+</ul>
+<router-outlet (activateEvents)="youHaveChildren()"></router-outlet>

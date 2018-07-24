@@ -1,0 +1,18 @@
+<form #queryForm="ngForm" (submit)="searchShows(queryForm)">
+  <label>
+  <input type="text" name="query" ngModel required>
+    <span *ngIf="queryForm.controls.query &&
+        queryForm.controls.query.errors">
+      {{queryForm.controls.query.errors | json}}
+    </span>
+  </label>
+  <button type="submit">Search</button>
+</form>
+
+<ul>
+  <li *ngFor="let show of shows">
+    {{show.name}}
+    <br/>
+    <img *ngIf="show.image" [attr.src]="show.image.medium">
+  </li>
+</ul>
