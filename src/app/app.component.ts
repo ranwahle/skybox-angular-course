@@ -1,5 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {SomeComponentComponent} from "./my-module/some-component/some-component.component";
+import {Store} from '@ngrx/store';
+import {LoginChanged} from './store/app.actions';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +12,9 @@ export class AppComponent implements OnInit{
   title = 'app';
   vulnerabilities;
 
+  constructor(private store: Store<any>) {
+
+  }
   ngOnInit() {
     setTimeout(() => {
       this.setVulnerablilities()
@@ -20,6 +25,10 @@ export class AppComponent implements OnInit{
     setTimeout(() =>
       this.childComponent.componentTitle = 'My Event has been handled')
 
+  }
+
+  changeLoggedInState(loggedIn: boolean) {
+    this.store.dispatch(new LoginChanged(loggedIn))
   }
 
   setVulnerablilities() {

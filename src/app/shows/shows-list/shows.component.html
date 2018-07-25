@@ -2,7 +2,6 @@
   <input placeholder="search" [formControlName]="QueryControlName"
          (keydown.enter)="searchShow()">
 </form>
-{{formGroup.errors | json}}
 <ul>
   <li *ngFor="let show of shows">
     <a [routerLink]="['singleShow/' + show.id]"> {{show.name}}

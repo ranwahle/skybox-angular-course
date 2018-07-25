@@ -1,2 +1,5 @@
-<a [routerLink]="['shows']">Shows</a>
+<div><a [routerLink]="['shows']">Shows</a></div>
+<div>
 <a [routerLink]="['vulnerabilities']">Vulnerabilities</a>
+</div>
+<mat-slide-toggle [(ngModel)]="actAsLogin" (change)="actAsloginChanged($event)" >Act as logged in </mat-slide-toggle>

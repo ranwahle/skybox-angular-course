@@ -1,2 +1,6 @@
-<app-header></app-header>
-<router-outlet></router-outlet>
+<div>
+  <app-header (actiAsLoggedInChange)="changeLoggedInState($event)"></app-header>
+</div>
+<div>
+  <router-outlet></router-outlet>
+</div>

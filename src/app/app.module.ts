@@ -16,6 +16,7 @@ import {StoreModule} from '@ngrx/store';
 import {reducers} from './store/app.reducers';
 import {environment} from '../environments/environment';
 import {StoreDevtools, StoreDevtoolsModule} from '@ngrx/store-devtools';
+import {MatSlideToggleModule} from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import {StoreDevtools, StoreDevtoolsModule} from '@ngrx/store-devtools';
     FormsModule,
     HttpClientModule,
     MyModuleModule,
+    MatSlideToggleModule,
     StoreModule.forRoot(reducers),
     environment.production ?  [] :  StoreDevtoolsModule.instrument({
       maxAge: 60,
